@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Password Validation</title>
+  <style>
+    .error { color: red; }
+    .success { color: green; }
+  </style>
+</head>
+<body>
+
+<h2>Password Check</h2>
+<form id="loginForm" onsubmit="return validatePassword()">
+  <label for="password">Enter Password:</label>
+  <input type="password" id="password" required>
+  <p id="message"></p>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+function validatePassword() {
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    // Example: password must be at least 8 chars, contain uppercase, lowercase, number, and special char
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!regex.test(password)) {
+        message.textContent = "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.";
+        message.className = "error";
+        return false; // Prevent form submission
+    }
+
+    message.textContent = "Password format is valid.";
+    message.className = "success";
+    return true; // Allow form submission
+}
+</script>
+
+</body>
+</html>
